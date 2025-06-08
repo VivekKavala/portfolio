@@ -1,0 +1,727 @@
+:root {
+    --bg-color: #0c0c0c;
+    /* Slightly darker bg */
+    --card-bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --primary-accent: #00f2a9;
+    --secondary-accent: #9370DB;
+    --subtle-text: #a0a0a0;
+    --border-color: #282828;
+    /* Slightly lighter border */
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    --box-shadow-hover: 0 6px 25px rgba(0, 0, 0, 0.4);
+    --font-futuristic: 'Rajdhani', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+    --header-height: 70px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: var(--header-height);
+    position: relative;
+    /* For z-index stacking context if needed */
+}
+
+/* Background Animated Objects */
+.background-animations {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    /* Behind content, above body bg */
+    overflow: hidden;
+    pointer-events: none;
+    /* Crucial: no interaction */
+}
+
+.background-animations span {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    /* Circles */
+    animation: animateBackground 20s linear infinite;
+}
+
+.background-animations span:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    left: 10%;
+    bottom: -150px;
+    background-color: rgba(0, 242, 169, 0.08);
+    animation-duration: 25s;
+    animation-delay: -2s;
+}
+
+.background-animations span:nth-child(2) {
+    width: 120px;
+    height: 120px;
+    left: 70%;
+    bottom: -180px;
+    background-color: rgba(147, 112, 219, 0.07);
+    animation-duration: 30s;
+    animation-delay: -15s;
+}
+
+.background-animations span:nth-child(3) {
+    width: 50px;
+    height: 50px;
+    left: 40%;
+    bottom: -120px;
+    background-color: rgba(0, 242, 169, 0.06);
+    animation-duration: 18s;
+    animation-delay: -10s;
+}
+
+.background-animations span:nth-child(4) {
+    width: 150px;
+    height: 150px;
+    left: 85%;
+    bottom: -200px;
+    background-color: rgba(147, 112, 219, 0.09);
+    animation-duration: 35s;
+    animation-delay: -5s;
+}
+
+.background-animations span:nth-child(5) {
+    width: 60px;
+    height: 60px;
+    left: 25%;
+    bottom: -130px;
+    background-color: rgba(0, 242, 169, 0.07);
+    animation-duration: 22s;
+    animation-delay: 0s;
+}
+
+.background-animations span:nth-child(6) {
+    /* Square example */
+    width: 70px;
+    height: 70px;
+    left: 55%;
+    bottom: -140px;
+    background-color: rgba(0, 242, 169, 0.05);
+    border-radius: 10%;
+    animation-duration: 28s;
+    animation-delay: -8s;
+}
+
+
+@keyframes animateBackground {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10%,
+    80% {
+        /* Visible for longer */
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-150vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* Header Styles */
+header {
+    /* background-color: var(--card-bg-color); */
+    padding: 0 5%;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--border-color);
+}
+
+header .logo a {
+    font-family: var(--font-futuristic);
+    font-size: 1.6rem;
+    color: var(--primary-accent);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+header nav ul li {
+    margin-left: 25px;
+}
+
+header nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+    /* Placeholder for hover effect */
+}
+
+header nav ul li a i {
+    margin-right: 5px;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active-link {
+    color: var(--primary-accent);
+    border-bottom-color: var(--primary-accent);
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    color: var(--primary-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 0;
+    position: relative;
+    /* Ensure content is above background animations */
+    z-index: 1;
+}
+
+h1,
+h2,
+h3.section-title-font {
+    font-family: var(--font-futuristic);
+    color: var(--primary-accent);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+h1 {
+    font-size: 3.5rem;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    font-family: var(--font-futuristic);
+    font-weight: 500;
+}
+
+p {
+    margin-bottom: 15px;
+    color: var(--subtle-text);
+    font-weight: 300;
+}
+
+a {
+    color: var(--primary-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-accent);
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--primary-accent);
+    color: var(--bg-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: var(--font-futuristic);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    margin: 5px;
+    border: 1px solid var(--primary-accent);
+}
+
+.btn:hover {
+    background-color: var(--secondary-accent);
+    color: var(--text-color);
+    border-color: var(--secondary-accent);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-accent);
+    border: 1px solid var(--primary-accent);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-accent);
+    color: var(--bg-color);
+}
+
+
+/* Hero Section */
+#hero {
+    min-height: calc(100vh - var(--header-height));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    /* background-color: #0a0a0a; */
+    position: relative;
+    /* For z-index stacking if needed by hero content */
+    z-index: 1;
+    /* Above background animations */
+}
+
+#hero h1 {
+    font-family: var(--font-futuristic);
+    font-size: 4rem;
+    margin-bottom: 10px;
+    color: var(--primary-accent);
+    animation: fadeInDown 1s ease-out;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+#hero .subtitle {
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    animation: fadeInUp 1s ease-out 0.5s;
+    animation-fill-mode: backwards;
+    font-weight: 400;
+}
+
+#hero .hero-description {
+    max-width: 600px;
+    margin-bottom: 30px;
+    color: var(--subtle-text);
+    animation: fadeInUp 1s ease-out 1s;
+    animation-fill-mode: backwards;
+}
+
+#hero .hero-links {
+    animation: fadeInUp 1s ease-out 1.5s;
+    animation-fill-mode: backwards;
+}
+
+/* Section Styling */
+section {
+    /* Applies to all sections, including hero for z-index */
+    position: relative;
+    z-index: 1;
+    /* Ensure sections are above background animations */
+}
+
+section:not(#hero) {
+    padding: 60px 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+section.visible {
+    opacity: 1 !important;
+    transform: translateY(0);
+}
+
+/* About Section */
+#about .about-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+#about .about-text {
+    flex: 2;
+}
+
+#about .about-image {
+    flex: 1;
+    text-align: center;
+}
+
+#about .about-image i {
+    font-size: 150px;
+    color: var(--primary-accent);
+    opacity: 0.7;
+}
+
+.interests-tags span {
+    display: inline-block;
+    background-color: var(--card-bg-color);
+    color: var(--primary-accent);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    margin: 5px 5px 5px 0;
+    border: 1px solid var(--primary-accent);
+    font-family: var(--font-body);
+}
+
+/* Card Styling (Projects, Skills, Goals) */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
+    border-left: 5px solid var(--primary-accent);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.card.visible {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+}
+
+.card h3 i {
+    margin-right: 10px;
+    color: var(--primary-accent);
+}
+
+.card .tech-tags span,
+.skill-tag {
+    display: inline-block;
+    background-color: var(--bg-color);
+    color: var(--primary-accent);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin: 3px;
+    font-family: var(--font-body);
+}
+
+.card .view-project {
+    display: inline-block;
+    margin-top: 15px;
+    font-weight: bold;
+    font-family: var(--font-body);
+}
+
+.card .view-project i {
+    margin-left: 5px;
+}
+
+/* Experience & Education Section */
+#experience-education .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.experience-column h3,
+.education-column h3 {
+    font-family: var(--font-futuristic);
+    color: var(--primary-accent);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.experience-item-content,
+.education-item-content {
+    background-color: var(--card-bg-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    border-left: 5px solid var(--secondary-accent);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.experience-item-content.visible,
+.education-item-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.item-header h4 {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 0;
+    font-family: var(--font-body);
+    font-weight: 700;
+}
+
+.item-header .company-school {
+    color: var(--primary-accent);
+    font-weight: bold;
+    font-family: var(--font-body);
+}
+
+.item-header .dates {
+    font-size: 0.9rem;
+    color: var(--subtle-text);
+    margin-bottom: 10px;
+    font-family: var(--font-body);
+}
+
+.cgpa {
+    display: inline-block;
+    background-color: var(--primary-accent);
+    color: var(--bg-color);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 10px;
+    font-family: var(--font-body);
+}
+
+
+/* Technical Skills Section */
+#skills .skill-category h3 i {
+    color: var(--secondary-accent);
+}
+
+
+/* Current Goals */
+#goals .card h3 i {
+    color: var(--primary-accent);
+}
+
+/* Let's Connect Section */
+#connect {
+    text-align: center;
+}
+
+#connect .connect-links a {
+    margin: 0 15px;
+    font-size: 1.1rem;
+}
+
+#connect .connect-links i {
+    margin-right: 8px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--card-bg-color);
+    /* Matches header */
+    color: var(--subtle-text);
+    font-size: 0.9em;
+    border-top: 1px solid var(--border-color);
+    position: relative;
+    /* For z-index context */
+    z-index: 1;
+    /* Above background animations */
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    #hero h1 {
+        font-size: 3rem;
+    }
+
+    #hero .subtitle {
+        font-size: 1.3rem;
+    }
+
+    h2 {
+        font-size: 2.2rem;
+    }
+
+    header nav ul {
+        display: none;
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background-color: var(--card-bg-color);
+        flex-direction: column;
+        padding: 15px 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        border-top: 1px solid var(--border-color);
+    }
+
+    header nav ul.active {
+        display: flex;
+    }
+
+    header nav ul li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    header nav ul li a {
+        display: block;
+        padding: 10px;
+        border-bottom-color: transparent;
+        /* Reset border for mobile view */
+    }
+
+    header nav ul li a:hover,
+    header nav ul li a.active-link {
+        color: var(--primary-accent);
+        border-bottom-color: transparent;
+        /* No underline for active/hover in mobile dropdown */
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .background-animations span {
+        animation-duration: 30s;
+    }
+
+    /* Slow down slightly on mobile */
+    .background-animations span:nth-child(even) {
+        display: none;
+    }
+
+    /* Show fewer on mobile */
+
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.8rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .container {
+        width: 95%;
+    }
+
+    #about .about-content {
+        flex-direction: column;
+    }
+
+    #about .about-image i {
+        font-size: 100px;
+    }
+
+    #experience-education .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    #hero h1 {
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+    }
+
+    #hero .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .card h3 {
+        font-size: 1.3rem;
+    }
+
+    header .logo a {
+        font-size: 1.3rem;
+    }
+
+    .background-animations span:nth-child(4),
+    .background-animations span:nth-child(6) {
+        display: none;
+    }
+
+    /* Even fewer shapes */
+}
